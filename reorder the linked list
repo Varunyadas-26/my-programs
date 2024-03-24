@@ -1,0 +1,63 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def reverse_linked_list(head):
+    prev = None
+    current = head
+    while current:
+        next_node = current.next
+        current.next = prev
+        prev = current
+        current = next_node
+    return prev
+
+def reorder_linked_list(head):
+    if not head or not head.next:
+        return head
+
+    # Find the middle of the linked list
+    slow_ptr = head
+    fast_ptr = head
+    while fast_ptr.next and fast_ptr.next.next:
+        slow_ptr = slow_ptr.next
+        fast_ptr = fast_ptr.next.next
+
+    # Reverse the second half of the linked list
+    second_half_head = reverse_linked_list(slow_ptr.next)
+    slow_ptr.next = None
+
+    # Merge the first half and the reversed second half
+    current = head
+    while current and second_half_head:
+        temp1 = current.next
+        temp2 = second_half_head.next
+        current.next = second_half_head
+        second_half_head.next = temp1
+        current = temp1
+        second_half_head = temp2
+
+    return head
+
+def display_linked_list(head):
+    current = head
+    while current:
+        print(current.data, end=" -> ")
+        current = current.next
+    print("None")
+
+# Example usage
+head = Node(10)
+head.next = Node(20)
+head.next.next = Node(30)
+head.next.next.next = Node(40)
+head.next.next.next.next = Node(50)
+
+print("Original linked list:")
+display_linked_list(head)
+
+head = reorder_linked_list(head)
+
+print("Reordered linked list:")
+display_linked_list(head)
