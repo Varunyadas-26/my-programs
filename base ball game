@@ -1,0 +1,19 @@
+l=[]
+n=int(input())
+while n>0:
+    l.append(input())
+    n=n-1
+o=[]
+i=0
+while i<len(l):
+    if l[i]!="C" and  l[i]!="D" and l[i]!="+":
+        o.append(int(l[i]))
+    elif l[i]=="C":
+        o.pop()
+    elif l[i]=="D":
+        o.append(o[-1]*2)
+    elif l[i]=="+":
+        o.append[o[-1]+o[-2]]
+        i=i+1
+    print(sum[o])
+            
