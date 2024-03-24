@@ -1,0 +1,37 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
+
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+
+def number_to_linked_list(number):
+    number_str = str(number)
+    linked_list = LinkedList()
+    for digit in number_str:
+        linked_list.insert(int(digit))
+    return linked_list
+
+# Example usage:
+number = int(input("enter a number"))
+linked_list = number_to_linked_list(number)
+linked_list.display()
